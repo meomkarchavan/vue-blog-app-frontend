@@ -5,14 +5,14 @@
     <div class="mt-2 col-md-12">
       <img v-bind:src="post.imageUrl" class="img-fluid" />
     </div>
-    <button
+    <!-- <button
       v-if="post.title != null"
       @click="likePost(post)"
       type="button"
       class="btn btn-primary mt-2"
     >
       Likes : {{ post.likes }}
-    </button>
+    </button> -->
   </div>
 </template>
 

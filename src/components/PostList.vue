@@ -2,8 +2,8 @@
   <div>
     <div>
       <virtual-list
-      style="height: 100vh; overflow-y: auto"
-        :data-key="'id'"
+        style="height: 100vh; overflow-y: auto"
+        :data-key="'postid'"
         :data-sources="postList"
         :data-component="itemComponent"
       />
@@ -20,10 +20,10 @@ import { mapState } from "vuex";
 export default {
   name: "Post",
   computed: mapState(["postList"]),
-  data(){
-    return{
+  data() {
+    return {
       itemComponent: Item,
-    }
+    };
   },
   components: { "virtual-list": VirtualList },
 };

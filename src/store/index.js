@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from "axios";
 
 Vue.use(Vuex)
 
@@ -11,14 +12,14 @@ export default new Vuex.Store({
     },
     mutations: {
         likePost(state, post) {
-            let index = state.postList.findIndex(p => p.id == post.id);
+            let index = state.postList.findIndex(p => p.postid == post.postid);
             if (index !== -1) {
 
                 state.postList[index].likes++
             }
         },
         setPost(state, post) {
-            state.active_el = post.id;
+            state.active_el = post.postid;
             state.post = post;
         },
         setPostList(state, postList) {
@@ -26,10 +27,14 @@ export default new Vuex.Store({
         }
     }, actions: {
         loadPostList(context) {
-            fetch('/data.json')
-                .then(res => res.json())
-                .then(res => {
-                    context.commit('setPostList', res);
+            axios
+                .get("/api/post/")
+                .then(function (response) {
+                    console.log(response.data)
+                    context.commit('setPostList', response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
                 });
         }
     }
