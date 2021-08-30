@@ -16,11 +16,11 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
+          <li class="nav-item active">
             <router-link to="/" class="nav-link active">Home</router-link>
           </li>
-          <li class="nav-item active">
-            <router-link :to="{ name: 'Blog' }" class="nav-link active"
+          <li class="nav-item">
+            <router-link :to="{ name: 'Blog' }" class="nav-link"
               >Blog</router-link
             >
           </li>
@@ -35,12 +35,16 @@
             </router-link>
           </li> -->
           <li class="nav-item">
-            <router-link to="/crud-post" class="nav-link active"> Curd </router-link>
+            <router-link to="/crud-post" class="nav-link "> Curd </router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/login" class="nav-link active">
+          <li class="nav-item" v-if="!isSignedIn">
+            <router-link to="/login" class="nav-link ">
               Login
             </router-link>
+          </li>
+          <li class="nav-item nav-link" v-else>
+            <button @click="logout" class="nav-link">LogOut</button>
+          
           </li>
         </ul>
       </div>
@@ -50,27 +54,21 @@
 </template>
 
 <script>
-// import { mapActions } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "App",
   components: {},
-  // created() {
-  //   this.loadPostList();
-  // },
-  // methods: {
-  //   ...mapActions(["loadPostList"]),
-  // },
+    computed: mapState(["isSignedIn"]),
+    methods:{
+      logout(){
+        this.$store.isSignedIn=false
+        localStorage.removeItem("access_token")
+        localStorage.removeItem("refresh_token")
+      }
+    }
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
