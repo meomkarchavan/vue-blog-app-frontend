@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="#">Blog App</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -16,36 +16,45 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <router-link to="/" class="nav-link active">Home</router-link>
+          </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home</a>
+            <router-link
+              :to="{ name: 'Blog' }"
+              class="nav-link active"
+              >Blog</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link to="/about" class="nav-link active"
+              >About Us</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link to="/contact" class="nav-link active">
+              Contact Us
+            </router-link>
+          </li>
+           <li class="nav-item">
+            <router-link to="/login" class="nav-link active">
+              Login 
+            </router-link>
           </li>
         </ul>
+        
       </div>
     </nav>
-    <div class="container-fluid mt-2 col-md-12">
-      <div class="row">
-        <div class="col-4">
-          <PostList></PostList>
-        </div>
-        <div class="col-8">
-          <Post></Post>
-        </div>
-      </div>
-    </div>
+        <router-view />
   </div>
 </template>
 
 <script>
-import Post from "./components/Post.vue";
-
-import PostList from "./components/PostList.vue";
 import { mapActions } from "vuex";
 
 export default {
   name: "App",
   components: {
-    Post,
-    PostList,
   },
   created() {
     this.loadPostList();

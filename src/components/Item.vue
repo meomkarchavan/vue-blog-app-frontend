@@ -6,7 +6,7 @@
   >
     <h5>
       {{ source.title }}
-      <!-- <span class="badge rounded-pill bg-primary">{{ source.likes }}</span> -->
+      <span class="badge rounded-pill bg-primary">{{ source.likes }}</span>
     </h5>
   </div>
 </template>
