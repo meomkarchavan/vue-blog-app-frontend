@@ -13,18 +13,11 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-
 import Post from "../components/Post.vue";
 import PostList from "../components/PostList.vue";
 export default {
   name: "Blog",
-  created() {
-    this.loadPostList();
-  },
-  methods: {
-    ...mapActions(["loadPostList"]),
-  },
+
   components: {
     Post,
     PostList,

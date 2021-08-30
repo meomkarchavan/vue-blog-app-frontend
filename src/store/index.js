@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from "axios";
+import router from '../router';
 
 Vue.use(Vuex)
 
@@ -9,8 +10,8 @@ export default new Vuex.Store({
         postList: [],
         post: {},
         active_el: 0,
-        access_token: "",
-        refresh_token: "",
+        // access_token: "",
+        // refresh_token: "",  
         user: {},
     },
     mutations: {
@@ -36,41 +37,47 @@ export default new Vuex.Store({
             state.user.username = user.username
             state.user.password = user.password
         },
-        setTokens(state, token) {
-            state.access_token = token.access_token
-            state.refresh_token = token.password
-        }
+        // setTokens(state, token) {
+        //     state.access_token = token.access_token
+        //     state.refresh_token = token.password
+        // }
     }, actions: {
         login(context, user) {
             axios
                 .post("/api/login", user)
                 .then(function (response) {
                     console.log(response.data)
-                    context.commit('setTokens', response.data);
+                    console.log(router)
+                    // context.commit('setTokens', response.data);
+                    localStorage.setItem('user', JSON.stringify(response.data))
+                    if (response.status === 200) {
+                        router.push({ path: '/' })
+                    }
                 })
                 .catch(function (error) {
+
                     console.log(error);
                 });
         },
         loadPostList(context) {
-            console.log(context.state.access_token);
             axios
                 .get("/api/post/",
                     {
                         headers: {
-                            Authorization: 'Bearer ' + context.state.access_token //the token is a variable which holds the token
+                            Authorization: 'Bearer ' + JSON.parse(localStorage.getItem("user")).access_token //the token is a variable which holds the token
                         }
                     }
                 )
                 .then(function (response) {
-                    console.log(response)
-
-                    context.commit('setPostList', response.data);
+                    if (response.data != null) {
+                        context.commit('setPostList', response.data);
+                    }
                 })
                 .catch(function (error) {
+                    if (error.response.status === 401) {
+                        router.push({ path: '/login' })
+                    }
 
-
-                    console.log(error);
                 });
         }
     }

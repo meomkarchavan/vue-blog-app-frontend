@@ -15,7 +15,7 @@
 import Item from "../components/Item.vue";
 import VirtualList from "vue-virtual-scroll-list";
 
-import { mapState } from "vuex";
+import { mapState,mapActions } from "vuex";
 
 export default {
   name: "Post",
@@ -24,6 +24,12 @@ export default {
     return {
       itemComponent: Item,
     };
+  },
+  created() {
+    this.loadPostList();
+  },
+  methods: {
+    ...mapActions(["loadPostList"]),
   },
   components: { "virtual-list": VirtualList },
 };

@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Blog App</a>
+      <a class="navbar-brand" href="#">Navbar</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -20,13 +20,11 @@
             <router-link to="/" class="nav-link active">Home</router-link>
           </li>
           <li class="nav-item active">
-            <router-link
-              :to="{ name: 'Blog' }"
-              class="nav-link active"
+            <router-link :to="{ name: 'Blog' }" class="nav-link active"
               >Blog</router-link
             >
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <router-link to="/about" class="nav-link active"
               >About Us</router-link
             >
@@ -35,33 +33,34 @@
             <router-link to="/contact" class="nav-link active">
               Contact Us
             </router-link>
+          </li> -->
+          <li class="nav-item">
+            <router-link to="/crud-post" class="nav-link active"> Curd </router-link>
           </li>
-           <li class="nav-item">
+          <li class="nav-item">
             <router-link to="/login" class="nav-link active">
-              Login 
+              Login
             </router-link>
           </li>
         </ul>
-        
       </div>
     </nav>
-        <router-view />
+    <router-view />
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+// import { mapActions } from "vuex";
 
 export default {
   name: "App",
-  components: {
-  },
-  created() {
-    this.loadPostList();
-  },
-  methods: {
-    ...mapActions(["loadPostList"]),
-  },
+  components: {},
+  // created() {
+  //   this.loadPostList();
+  // },
+  // methods: {
+  //   ...mapActions(["loadPostList"]),
+  // },
 };
 </script>
 

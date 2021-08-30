@@ -5,6 +5,11 @@ import About from '../views/About.vue'
 import Contact from '../views/Contact.vue'
 import Blog from '../views/Blog'
 import Login from '../views/Login.vue'
+import AddPost from '../views/AddPost.vue'
+import CrudPost from '../views/CrudPost.vue'
+import DeletePost from '../views/DeletePost.vue'
+import UpdatePost from '../views/UpdatePost.vue'
+import FindPost from '../views/FindPost.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -32,6 +37,29 @@ const routes = [
     path: '/blog',
     name: 'Blog',
     component: Blog,
+  },
+  {
+    path: '/crud-post',
+    name: 'CrudPost',
+    component: CrudPost,
+    children: [{
+      path: 'add-post',
+      component: AddPost
+    },
+    {
+      path: 'delete-post',
+      component: DeletePost
+    },
+    {
+      path: 'update-post',
+      component: UpdatePost
+    },
+    {
+      path: 'find-post',
+      component: FindPost
+    },
+
+    ]
   },
 ]
 
