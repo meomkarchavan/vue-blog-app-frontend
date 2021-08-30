@@ -9,8 +9,15 @@ export default new Vuex.Store({
         postList: [],
         post: {},
         active_el: 0,
+        access_token: "",
+        refresh_token: "",
+        user: {},
     },
     mutations: {
+        setToken(state, token) {
+            state.access_token = token.access_token;
+            state.post = token.refresh_token;
+        },
         likePost(state, post) {
             let index = state.postList.findIndex(p => p.postid == post.postid);
             if (index !== -1) {
@@ -24,16 +31,45 @@ export default new Vuex.Store({
         },
         setPostList(state, postList) {
             state.postList = postList
+        },
+        setAndLoginUser(state, user) {
+            state.user.username = user.username
+            state.user.password = user.password
+        },
+        setTokens(state, token) {
+            state.access_token = token.access_token
+            state.refresh_token = token.password
         }
     }, actions: {
-        loadPostList(context) {
+        login(context, user) {
             axios
-                .get("/api/post/")
+                .post("/api/login", user)
                 .then(function (response) {
                     console.log(response.data)
+                    context.commit('setTokens', response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+        loadPostList(context) {
+            console.log(context.state.access_token);
+            axios
+                .get("/api/post/",
+                    {
+                        headers: {
+                            Authorization: 'Bearer ' + context.state.access_token //the token is a variable which holds the token
+                        }
+                    }
+                )
+                .then(function (response) {
+                    console.log(response)
+
                     context.commit('setPostList', response.data);
                 })
                 .catch(function (error) {
+
+
                     console.log(error);
                 });
         }
