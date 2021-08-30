@@ -20,8 +20,8 @@
             <router-link to="/" class="nav-link active">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link :to="{ name: 'Blog' }" class="nav-link"
-              >Blog</router-link
+            <router-link :to="{ name: 'Todo' }" class="nav-link"
+              >Todo</router-link
             >
           </li>
           <!-- <li class="nav-item">
@@ -35,16 +35,13 @@
             </router-link>
           </li> -->
           <li class="nav-item">
-            <router-link to="/crud-post" class="nav-link "> Curd </router-link>
+            <router-link to="/crud-todo" class="nav-link"> Curd </router-link>
           </li>
           <li class="nav-item" v-if="!isSignedIn">
-            <router-link to="/login" class="nav-link ">
-              Login
-            </router-link>
+            <router-link to="/login" class="nav-link"> Login </router-link>
           </li>
           <li class="nav-item nav-link" v-else>
             <button @click="logout" class="nav-link">LogOut</button>
-          
           </li>
         </ul>
       </div>
@@ -59,14 +56,14 @@ import { mapState } from "vuex";
 export default {
   name: "App",
   components: {},
-    computed: mapState(["isSignedIn"]),
-    methods:{
-      logout(){
-        this.$store.isSignedIn=false
-        localStorage.removeItem("access_token")
-        localStorage.removeItem("refresh_token")
-      }
-    }
+  computed: mapState(["isSignedIn"]),
+  methods: {
+    logout() {
+      this.$store.isSignedIn = false;
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+    },
+  },
 };
 </script>
 

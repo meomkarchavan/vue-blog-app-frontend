@@ -1,4 +1,4 @@
-# blog_app
+# front_end_todo
 
 ## Project setup
 ```

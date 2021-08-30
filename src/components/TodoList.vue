@@ -3,8 +3,8 @@
     <div>
       <virtual-list
         style="height: 100vh; overflow-y: auto"
-        :data-key="'postid'"
-        :data-sources="postList"
+        :data-key="'todoid'"
+        :data-sources="todoList"
         :data-component="itemComponent"
       />
     </div>
@@ -12,24 +12,24 @@
 </template>
 
 <script>
-import Item from "../components/Item.vue";
+import Item from "./Item.vue";
 import VirtualList from "vue-virtual-scroll-list";
 
-import { mapState,mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
-  name: "Post",
-  computed: mapState(["postList"]),
+  name: "TodoList",
+  computed: mapState(["todoList"]),
   data() {
     return {
       itemComponent: Item,
     };
   },
   created() {
-    this.loadPostList();
+    this.loadTodoList();
   },
   methods: {
-    ...mapActions(["loadPostList"]),
+    ...mapActions(["loadTodoList"]),
   },
   components: { "virtual-list": VirtualList },
 };

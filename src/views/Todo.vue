@@ -3,24 +3,24 @@
     <!-- {{ $route.params }} -->
     <div class="row">
       <div class="col-4">
-        <PostList></PostList>
+        <TodoList></TodoList>
       </div>
       <div class="col-8">
-        <Post></Post>
+        <Todo></Todo>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Post from "../components/Post.vue";
-import PostList from "../components/PostList.vue";
+import Todo from "../components/Todo.vue";
+import TodoList from "../components/TodoList.vue";
 export default {
   name: "Blog",
 
   components: {
-    Post,
-    PostList,
+    Todo,
+    TodoList,
   },
 };
 </script>

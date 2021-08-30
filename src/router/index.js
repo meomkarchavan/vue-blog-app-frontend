@@ -3,13 +3,13 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Contact from '../views/Contact.vue'
-import Blog from '../views/Blog'
+import Todo from '../views/Todo'
 import Login from '../views/Login.vue'
-import AddPost from '../views/AddPost.vue'
-import CrudPost from '../views/CrudPost.vue'
-import DeletePost from '../views/DeletePost.vue'
-import UpdatePost from '../views/UpdatePost.vue'
-import FindPost from '../views/FindPost.vue'
+import AddTodo from '../views/AddTodo.vue'
+import CrudTodo from '../views/CrudTodo.vue'
+import DeleteTodo from '../views/DeleteTodo.vue'
+import UpdateTodo from '../views/UpdateTodo.vue'
+import FindTodo from '../views/FindTodo.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -34,29 +34,29 @@ const routes = [
     component: Login
   },
   {
-    path: '/blog',
-    name: 'Blog',
-    component: Blog,
+    path: '/todo',
+    name: 'Todo',
+    component: Todo,
   },
   {
-    path: '/crud-post',
-    name: 'CrudPost',
-    component: CrudPost,
+    path: '/crud-todo',
+    name: 'CrudTodo',
+    component: CrudTodo,
     children: [{
-      path: 'add-post',
-      component: AddPost
+      path: 'add-todo',
+      component: AddTodo
     },
     {
-      path: 'delete-post',
-      component: DeletePost
+      path: 'delete-todo',
+      component: DeleteTodo
     },
     {
-      path: 'update-post',
-      component: UpdatePost
+      path: 'update-todo',
+      component: UpdateTodo
     },
     {
-      path: 'find-post',
-      component: FindPost
+      path: 'find-todo',
+      component: FindTodo
     },
 
     ]

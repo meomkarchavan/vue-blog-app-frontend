@@ -7,28 +7,26 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        postList: [],
-        post: {},
+        todoList: [],
+        todo: {},
         active_el: 0,
-        // access_token: "",
-        // refresh_token: "",  
         user: {},
         isSignedIn: false,
     },
     mutations: {
-        likePost(state, post) {
-            let index = state.postList.findIndex(p => p.postid == post.postid);
+        likeTodo(state, todo) {
+            let index = state.todoList.findIndex(p => p.todoid == todo.todoid);
             if (index !== -1) {
 
-                state.postList[index].likes++
+                state.todoList[index].likes++
             }
         },
-        setPost(state, post) {
-            state.active_el = post.postid;
-            state.post = post;
+        setTodo(state, todo) {
+            state.active_el = todo.todoid;
+            state.todo = todo;
         },
-        setPostList(state, postList) {
-            state.postList = postList
+        setTodoList(state, todoList) {
+            state.todoList = todoList
         },
         setAndLoginUser(state, user) {
             state.user.username = user.username
@@ -38,14 +36,18 @@ export default new Vuex.Store({
             if (JSON.parse(localStorage.getItem("access_token")) != null) {
                 state.isSignedIn = true
             }
-        }
+        }, markDone(state, todo) {
+            state.todo.completed = !todo.completed
+        },
+
     }, actions: {
+        completeTodo({ commit }, todo) {
+            commit('markDone', todo)
+        },
         login(context, user) {
             axios
                 .post("/api/login", user)
                 .then(function (response) {
-                    // context.commit('setTokens', response.data);
-                    // localStorage.removeItem("mytime")
                     localStorage.setItem('access_token', response.data.access_token)
                     localStorage.setItem('refresh_token', response.data.refresh_token)
                     context.state.isSignedIn = true
@@ -58,9 +60,9 @@ export default new Vuex.Store({
                     console.log(error);
                 });
         },
-        loadPostList(context) {
+        loadTodoList(context) {
             axios
-                .get("/api/post/",
+                .get("/api/todo/",
                     {
                         headers: {
                             Authorization: 'Bearer ' + localStorage.getItem("access_token") //the token is a variable which holds the token
@@ -69,13 +71,13 @@ export default new Vuex.Store({
                 )
                 .then(function (response) {
                     if (response.data != null) {
-                        context.commit('setPostList', response.data);
+                        context.commit('setTodoList', response.data);
                     }
                 })
                 .catch(function (error) {
                     if (error.response.status === 401) {
                         localStorage.removeItem("access_token")
-                        context.state.isSignedIn=false
+                        context.state.isSignedIn = false
                         router.push({ path: '/login' })
                     }
 
