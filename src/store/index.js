@@ -13,12 +13,9 @@ export default new Vuex.Store({
         // access_token: "",
         // refresh_token: "",  
         user: {},
+        isSignedIn: false,
     },
     mutations: {
-        setToken(state, token) {
-            state.access_token = token.access_token;
-            state.post = token.refresh_token;
-        },
         likePost(state, post) {
             let index = state.postList.findIndex(p => p.postid == post.postid);
             if (index !== -1) {
@@ -37,19 +34,21 @@ export default new Vuex.Store({
             state.user.username = user.username
             state.user.password = user.password
         },
-        // setTokens(state, token) {
-        //     state.access_token = token.access_token
-        //     state.refresh_token = token.password
-        // }
+        setIsSignedIn(state) {
+            if (JSON.parse(localStorage.getItem("access_token")) != null) {
+                state.isSignedIn = true
+            }
+        }
     }, actions: {
         login(context, user) {
             axios
                 .post("/api/login", user)
                 .then(function (response) {
-                    console.log(response.data)
-                    console.log(router)
                     // context.commit('setTokens', response.data);
-                    localStorage.setItem('user', JSON.stringify(response.data))
+                    // localStorage.removeItem("mytime")
+                    localStorage.setItem('access_token', response.data.access_token)
+                    localStorage.setItem('refresh_token', response.data.refresh_token)
+                    context.state.isSignedIn = true
                     if (response.status === 200) {
                         router.push({ path: '/' })
                     }
@@ -64,7 +63,7 @@ export default new Vuex.Store({
                 .get("/api/post/",
                     {
                         headers: {
-                            Authorization: 'Bearer ' + JSON.parse(localStorage.getItem("user")).access_token //the token is a variable which holds the token
+                            Authorization: 'Bearer ' + localStorage.getItem("access_token") //the token is a variable which holds the token
                         }
                     }
                 )
@@ -75,6 +74,8 @@ export default new Vuex.Store({
                 })
                 .catch(function (error) {
                     if (error.response.status === 401) {
+                        localStorage.removeItem("access_token")
+                        context.state.isSignedIn=false
                         router.push({ path: '/login' })
                     }
 

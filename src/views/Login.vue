@@ -27,7 +27,6 @@ export default {
   methods: {
     ...mapActions(["login"]),
     Login(){
-        console.log(this.user);
         this.login(this.user)
     }
   },
