@@ -3,7 +3,6 @@
     @click="setTodo(source)"
     class="list-group-item list-group-item-action"
     :class="{
-      active: active_el == source.todoid && !source.done,
       'bg-success text-white': source.done,
     }"
   >
@@ -21,7 +20,7 @@ export default {
   computed: mapState(["active_el"]),
   methods: {
     setTodo(todo) {
-      this.$store.commit("setTodo", todo);
+      this.$store.commit("SET_TODO", todo);
     },
   },
   props: {

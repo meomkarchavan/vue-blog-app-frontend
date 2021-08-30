@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Contact from '../views/Contact.vue'
-import Todo from '../views/Todo'
+import TodoView from '../views/TodoView'
 import Login from '../views/Login.vue'
 import AddTodo from '../views/AddTodo.vue'
 import CrudTodo from '../views/CrudTodo.vue'
@@ -36,7 +36,7 @@ const routes = [
   {
     path: '/todo',
     name: 'Todo',
-    component: Todo,
+    component: TodoView,
   },
   {
     path: '/crud-todo',

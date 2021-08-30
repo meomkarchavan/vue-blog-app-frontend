@@ -10,39 +10,70 @@ export default new Vuex.Store({
         todoList: [],
         todo: {},
         active_el: 0,
-        user: {},
         isSignedIn: false,
+        user: {
+            "userid": "3DBBD8",
+            "firstname": "omkar",
+            "lastname": "chavan",
+            "email": "test123@gmail.com",
+            "username": "omkar123",
+            "password": "strongpass"
+        }
     },
     mutations: {
-        likeTodo(state, todo) {
-            let index = state.todoList.findIndex(p => p.todoid == todo.todoid);
-            if (index !== -1) {
 
-                state.todoList[index].likes++
-            }
-        },
-        setTodo(state, todo) {
+        SET_TODO(state, todo) {
             state.active_el = todo.todoid;
             state.todo = todo;
         },
-        setTodoList(state, todoList) {
+        SET_TODOLIST(state, todoList) {
             state.todoList = todoList
         },
-        setAndLoginUser(state, user) {
-            state.user.username = user.username
-            state.user.password = user.password
+        // setAndLoginUser(state, user) {
+        //     state.user.username = user.username
+        //     state.user.password = user.password
+        // },
+        // setIsSignedIn(state) {
+        //     if (JSON.parse(localStorage.getItem("access_token")) != null) {
+        //         state.isSignedIn = true
+        //     }
+        // },
+        MARK_DONE(state, todo) {
+            state.todo.done = !todo.done
         },
-        setIsSignedIn(state) {
-            if (JSON.parse(localStorage.getItem("access_token")) != null) {
-                state.isSignedIn = true
-            }
-        }, markDone(state, todo) {
-            state.todo.completed = !todo.completed
+        ADD_TODO(state, todo) {
+            todo.userid = state.user.userid
+            state.todoList.push(todo)
+
         },
+        DELETE_TODO(state, todo) {
+            state.todoList = state.todoList.filter((item) => item.todoid !== todo.todoid)
+        }
+
+
 
     }, actions: {
+        addTodo({ commit }, todo) {
+            commit('ADD_TODO', todo)
+            // TODO add in db
+        },
+        deleteTodo({ commit }, todo) {
+            commit('DELETE_TODO', todo)
+
+            // TODO delete in db
+        },
+
         completeTodo({ commit }, todo) {
-            commit('markDone', todo)
+            commit('MARK_DONE', todo)
+            axios
+                .post("/api/todo/update", todo)
+                .then(function (response) {
+                    console.log(response.data)
+                })
+                .catch(function (error) {
+
+                    console.log(error);
+                });
         },
         login(context, user) {
             axios
@@ -71,7 +102,7 @@ export default new Vuex.Store({
                 )
                 .then(function (response) {
                     if (response.data != null) {
-                        context.commit('setTodoList', response.data);
+                        context.commit('SET_TODOLIST', response.data);
                     }
                 })
                 .catch(function (error) {
@@ -83,5 +114,5 @@ export default new Vuex.Store({
 
                 });
         }
-    }
+    },
 })
