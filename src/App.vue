@@ -13,35 +13,29 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <router-link to="/" class="nav-link active">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link :to="{ name: 'Todo' }" class="nav-link"
-              >Todo</router-link
-            >
-          </li>
-          <!-- <li class="nav-item">
-            <router-link to="/about" class="nav-link active"
-              >About Us</router-link
-            >
+            <router-link :to="{ name: 'Todo' }" class="nav-link">
+              Your Passes
+            </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/contact" class="nav-link active">
-              Contact Us
+            <router-link :to="{ name: 'ApplyPass' }" class="nav-link">
+              Apply for Pass
             </router-link>
-          </li> -->
+          </li>
           <li class="nav-item">
             <router-link to="/crud-todo" class="nav-link"> Curd </router-link>
           </li>
           <li class="nav-item" v-if="!isSignedIn">
             <router-link to="/login" class="nav-link"> Login </router-link>
           </li>
-          <li class="nav-item nav-link" v-else>
-            <button @click="logout" class="nav-link">LogOut</button>
+          <li class="nav-item" v-else>
+            <a  class="nav-link" @click="logOut()"> LogOut </a>
           </li>
         </ul>
       </div>
@@ -51,18 +45,17 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "App",
   components: {},
-  computed: mapState(["isSignedIn"]),
+  computed: mapState(["isSignedIn",]),
+  created() {
+    this.checkToken();
+  },
   methods: {
-    logout() {
-      this.$store.isSignedIn = false;
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("refresh_token");
-    },
+    ...mapActions(["checkToken","logOut"]),
   },
 };
 </script>
