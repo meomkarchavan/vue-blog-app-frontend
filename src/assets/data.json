@@ -1,0 +1,208 @@
+[
+{
+    "_id" : ObjectId("612dbeb62f6c1ad032bff909"),
+    "passid" : "129A31",
+    "userid" : "625A04",
+    "userfullname" : "firstname lastname",
+    "purposeid" : "2",
+    "date" : ISODate("2021-08-31T05:31:34.443Z"),
+    "approved" : false,
+    "rejected" : true
+},
+
+{
+    "_id" : ObjectId("612dc272a425de66e5ff69ff"),
+    "passid" : "0119D8",
+    "userid" : "625A04",
+    "userfullname" : "firstname lastname",
+    "purposeid" : "2",
+    "date" : ISODate("2021-08-31T05:28:06.353Z"),
+    "approved" : false,
+    "rejected" : true
+},
+{
+    "_id" : ObjectId("612df67b86e1db5d1a5530c8"),
+    "passid" : "52AFF8",
+    "userid" : "7B94AC",
+    "userfullname" : "firstnamelastname",
+    "purposeid" : "2",
+    "date" : ISODate("2021-08-31T09:29:20.627Z"),
+    "approved" : false,
+    "rejected" : true
+},
+
+{
+    "_id" : ObjectId("612df6aa86e1db5d1a5530cd"),
+    "passid" : "A4ECA4",
+    "userid" : "7B94AC",
+    "userfullname" : "firstnamelastname",
+    "purposeid" : "1",
+    "date" : ISODate("2021-08-31T09:30:08.010Z"),
+    "approved" : false,
+    "rejected" : true
+},
+
+{
+    "_id" : ObjectId("612df6fa86e1db5d1a5530d3"),
+    "passid" : "96156F",
+    "userid" : "7B94AC",
+    "userfullname" : "firstnamelastname",
+    "purposeid" : "0",
+    "date" : ISODate("2021-08-31T09:31:32.811Z"),
+    "approved" : false,
+    "rejected" : true
+},
+
+{
+    "_id" : ObjectId("612df70c86e1db5d1a5530d7"),
+    "passid" : "085D51",
+    "userid" : "7B94AC",
+    "userfullname" : "firstnamelastname",
+    "purposeid" : "2",
+    "date" : ISODate("2021-08-31T09:31:51.026Z"),
+    "approved" : true,
+    "rejected" : false
+},
+
+{
+    "_id" : ObjectId("612df74c86e1db5d1a5530da"),
+    "passid" : "B39823",
+    "userid" : "7B94AC",
+    "userfullname" : "firstnamelastname",
+    "purposeid" : "",
+    "date" : ISODate("1970-01-01T00:00:00.000Z"),
+    "approved" : false,
+    "rejected" : false
+},
+
+{
+    "_id" : ObjectId("612e018a86e1db5d1a5530f6"),
+    "passid" : "AD388A",
+    "userid" : "7B94AC",
+    "userfullname" : "firstnamelastname",
+    "purposeid" : "2",
+    "date" : ISODate("2021-08-01T00:00:00.000Z"),
+    "approved" : true,
+    "rejected" : false
+},
+
+{
+    "_id" : ObjectId("612e018f86e1db5d1a5530f8"),
+    "passid" : "719540",
+    "userid" : "7B94AC",
+    "userfullname" : "firstnamelastname",
+    "purposeid" : "0",
+    "date" : ISODate("2021-08-20T00:00:00.000Z"),
+    "approved" : false,
+    "rejected" : false
+},
+
+{
+    "_id" : ObjectId("612e019286e1db5d1a5530fa"),
+    "passid" : "47A4BC",
+    "userid" : "7B94AC",
+    "userfullname" : "firstnamelastname",
+    "purposeid" : "2",
+    "date" : ISODate("2021-10-06T00:00:00.000Z"),
+    "approved" : false,
+    "rejected" : false
+},
+
+{
+    "_id" : ObjectId("612e0ee05e327cb9c94536cd"),
+    "passid" : "0E2003",
+    "userid" : "97EC40",
+    "userfullname" : "firstname lastname",
+    "purposeid" : "0",
+    "date" : ISODate("2021-10-12T00:00:00.000Z"),
+    "approved" : false,
+    "rejected" : false
+},
+
+{
+    "_id" : ObjectId("612e0ee65e327cb9c94536cf"),
+    "passid" : "139B37",
+    "userid" : "97EC40",
+    "userfullname" : "firstname lastname",
+    "purposeid" : "1",
+    "date" : ISODate("2021-10-01T00:00:00.000Z"),
+    "approved" : false,
+    "rejected" : false
+},
+
+{
+    "_id" : ObjectId("612e0eeb5e327cb9c94536d1"),
+    "passid" : "22D306",
+    "userid" : "97EC40",
+    "userfullname" : "firstname lastname",
+    "purposeid" : "2",
+    "date" : ISODate("2021-10-26T00:00:00.000Z"),
+    "approved" : false,
+    "rejected" : false
+},
+
+{
+    "_id" : ObjectId("612e0ef05e327cb9c94536d3"),
+    "passid" : "A12684",
+    "userid" : "97EC40",
+    "userfullname" : "firstname lastname",
+    "purposeid" : "1",
+    "date" : ISODate("2021-09-15T00:00:00.000Z"),
+    "approved" : false,
+    "rejected" : false
+},
+
+{
+    "_id" : ObjectId("612e0efd5e327cb9c94536d6"),
+    "passid" : "CCDB1D",
+    "userid" : "3EABD3",
+    "userfullname" : "User6Name lastname",
+    "purposeid" : "0",
+    "date" : ISODate("2021-08-20T00:00:00.000Z"),
+    "approved" : false,
+    "rejected" : false
+},
+
+{
+    "_id" : ObjectId("612e0f025e327cb9c94536d8"),
+    "passid" : "D9338B",
+    "userid" : "3EABD3",
+    "userfullname" : "User6Name lastname",
+    "purposeid" : "2",
+    "date" : ISODate("2021-08-22T00:00:00.000Z"),
+    "approved" : false,
+    "rejected" : false
+},
+
+{
+    "_id" : ObjectId("612e0f075e327cb9c94536da"),
+    "passid" : "40DA3A",
+    "userid" : "3EABD3",
+    "userfullname" : "User6Name lastname",
+    "purposeid" : "1",
+    "date" : ISODate("2021-09-20T00:00:00.000Z"),
+    "approved" : false,
+    "rejected" : false
+},
+
+{
+    "_id" : ObjectId("612e0f0a5e327cb9c94536dc"),
+    "passid" : "1EFE24",
+    "userid" : "3EABD3",
+    "userfullname" : "User6Name lastname",
+    "purposeid" : "1",
+    "date" : ISODate("2021-09-30T00:00:00.000Z"),
+    "approved" : false,
+    "rejected" : false
+},
+
+{
+    "_id" : ObjectId("612e0f115e327cb9c94536de"),
+    "passid" : "C4B5E1",
+    "userid" : "3EABD3",
+    "userfullname" : "User6Name lastname",
+    "purposeid" : "0",
+    "date" : ISODate("2021-09-19T00:00:00.000Z"),
+    "approved" : false,
+    "rejected" : false
+},]

@@ -115,19 +115,19 @@ export default new Vuex.Store({
             commit('LOGOUT')
 
         },
-        addTodo({ commit }, todo) {
-            commit('ADD_TODO', todo)
+        addPass({ commit }, pass) {
+            commit('ADD_PASS', pass)
             // TODO add in db
         },
-        deleteTodo({ commit }, todo) {
-            commit('DELETE_TODO', todo)
+        deletePass({ commit }, pass) {
+            commit('DELETE_PASS', pass)
 
             // TODO delete in db
         },
-        completeTodo({ commit }, todo) {
-            commit('MARK_DONE', todo)
+        completePass({ commit }, pass) {
+            commit('MARK_DONE', pass)
             axios
-                .post("/api/todo/update", todo)
+                .post("/api/pass/update", pass)
                 .then(function (response) {
                     console.log(response.data)
                 })
@@ -214,6 +214,7 @@ export default new Vuex.Store({
         },
         loadUserPassList(context) {
             var url;
+            console.log(context.state.isAdmin);
             if(context.state.isAdmin){
                 url="/api/pass/"
             }else{

@@ -34,9 +34,14 @@
               <span v-if="isAdmin"> Approve Pass </span>
             </router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/crud-todo" class="nav-link" v-if="isAdmin">
+          <!-- <li class="nav-item">
+            <router-link to="/crud-pass" class="nav-link" v-if="isAdmin">
               Curd
+            </router-link>
+          </li> -->
+            <li class="nav-item">
+            <router-link to="/dashboard" class="nav-link" v-if="isAdmin">
+              Dashboard
             </router-link>
           </li>
           <li class="nav-item" v-if="!isSignedIn">

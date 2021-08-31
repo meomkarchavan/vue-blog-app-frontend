@@ -3,14 +3,17 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import PassView from '../views/PassView'
 import Login from '../views/Login.vue'
-import AddTodo from '../views/AddTodo.vue'
-import CrudTodo from '../views/CrudTodo.vue'
-import DeleteTodo from '../views/DeleteTodo.vue'
-import UpdateTodo from '../views/UpdateTodo.vue'
-import FindTodo from '../views/FindTodo.vue'
+import AddPass from '../views/AddPass.vue'
+import CrudPass from '../views/CrudPass.vue'
+import DeletePass from '../views/DeletePass.vue'
+import UpdatePass from '../views/UpdatePass.vue'
+import FindPass from '../views/FindPass.vue'
 import ApplyPass from '../views/ApplyPass.vue'
 import store from '../store/'
 import Approve from '../views/Approve.vue'
+import Dashboard from '../views/Dashboard.vue'
+import Table from '../components/Table.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -46,29 +49,29 @@ const routes = [
     }
   },
   {
-    path: '/crud-todo',
-    name: 'CrudTodo',
-    component: CrudTodo,
+    path: '/crud-pass',
+    name: 'CrudPass',
+    component: CrudPass,
     meta: {
       requiresAuth: true
     },
     children: [{
-      path: 'add-todo',
-      component: AddTodo
+      path: 'add-pass',
+      component: AddPass
     },
     {
-      path: 'delete-todo',
-      component: DeleteTodo
+      path: 'delete-pass',
+      component: DeletePass
     },
     {
-      path: 'update-todo',
-      component: UpdateTodo
+      path: 'update-pass',
+      component: UpdatePass
     },
     {
-      path: 'find-todo',
-      component: FindTodo
+      path: 'find-pass',  
+      component: FindPass
     },
-    
+
 
     ]
   },
@@ -78,7 +81,19 @@ const routes = [
     component: Approve,
     meta: {
       requiresAuth: true
-    },
+    }
+    
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard,
+    meta: {
+      requiresAuth: true
+    },children: [{
+      path: 'table',
+      component: Table
+    },]
   },
 ]
 

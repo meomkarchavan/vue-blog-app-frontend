@@ -27,7 +27,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(["addTodo"]),
+    ...mapActions(["addPass"]),
   },
   components: {
     Pass,

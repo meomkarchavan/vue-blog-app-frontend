@@ -1,8 +1,8 @@
 <template>
   <div>
     <form action="">
-      <label for="title"> Todo Id </label>
-      <input type="text" v-model="todo.todoid" class="form-control" />
+      <label for="title"> Pass Id </label>
+      <input type="text" v-model="pass.passid" class="form-control" />
     </form>
     <button class="btn btn-primary mt-2">Delete</button>
   </div>
@@ -12,9 +12,9 @@
 // import { mapActions } from 'vuex'
 
 export default {
-  name: "DeleteTodo",
+  name: "DeletePass",
   data() {
-    return { todo: {} };
+    return { pass: {} };
   },
 };
 </script>

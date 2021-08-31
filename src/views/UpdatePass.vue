@@ -2,10 +2,10 @@
   <div>
     <form action="">
       <label for="title"> Title </label>
-      <input type="text" v-model="todo.title" class="form-control" />
+      <input type="text" v-model="pass.title" class="form-control" />
 
       <label for="description"> description </label>
-      <textarea type="text" v-model="todo.description" class="form-control">
+      <textarea type="text" v-model="pass.description" class="form-control">
       </textarea>
     </form>
     <button class="btn btn-primary mt-2">Update</button>
@@ -14,9 +14,9 @@
 
 <script>
 export default {
-  name: "UpdateTodo",
+  name: "UpdatePass",
   data() {
-    return { todo: {} };
+    return { pass: {} };
   },
 };
 </script>
