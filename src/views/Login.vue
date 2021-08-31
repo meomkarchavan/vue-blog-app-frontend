@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <form action="">
+  <div >
+    <form  style="width:50%" action="">
       <label for="username">
         username
       </label>

@@ -13,14 +13,6 @@ export default new Vuex.Store({
         isSignedIn: false,
         isAdmin: false,
         user: {},
-        // user: {
-        //     "userid": "3DBBD8",
-        //     "firstname": "omkar",
-        //     "lastname": "chavan",
-        //     "email": "test123@gmail.com",
-        //     "username": "omkar123",
-        //     "password": "strongpass"
-        // },
         purposeList: {}
     },
     mutations: {
@@ -38,13 +30,25 @@ export default new Vuex.Store({
             state.user.username = user.username
             state.user.password = user.password
         },
+        SET_USER(state) {
+            var user = JSON.parse(localStorage.getItem("user"))
+            if (user != null) {
+                state.user = user
+                state.isSignedIn = true
+            }
+            if (user.role == "admin") {
+                state.isAdmin = true
+            } else {
+                state.isAdmin = false
+            }
+        },
         LOGIN(state, data) {
-            console.log(data);
-
             if (data != null) {
                 localStorage.setItem('access_token', data.token.access_token)
                 localStorage.setItem('refresh_token', data.token.refresh_token)
+                localStorage.setItem('user', JSON.stringify(data.user))
                 state.user = data.user
+                state.isSignedIn = true
                 if (data.user.role == "admin") {
                     state.isAdmin = true
                 }
@@ -59,33 +63,29 @@ export default new Vuex.Store({
             localStorage.removeItem("refresh_token");
             state.isSignedIn = false
         },
-        MARK_DONE(state, todo) {
-            state.todo.done = !todo.done
-        },
         ADD_PASS(state, pass) {
             pass.userid = state.user.userid
             state.passList.push(pass)
 
         },
-        DELETE_TODO(state, pass) {
+        DELETE_PASS(state, pass) {
             state.passList = state.passList.filter((item) => item.passid !== pass.passid)
         }
 
 
 
     }, actions: {
-        applyPass(context){
-            axios
-                .get("/api/pass/add",
-                    {
-                        headers: {
-                            Authorization: 'Bearer ' + localStorage.getItem("access_token") //the token is a variable which holds the token
-                        }
+        applyPass(context, pass) {
+            axios.post("/api/pass/add", pass,
+                {
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem("access_token") //the token is a variable which holds the token
                     }
-                )
+                }
+            )
                 .then(function (response) {
                     if (response.data != null) {
-                        context.commit('SET_TODOLIST', response.data);
+                        context.commit('ADD_PASS', response.data);
                     }
                 })
                 .catch(function (error) {
@@ -99,6 +99,7 @@ export default new Vuex.Store({
         },
         checkToken({ commit }) {
             commit('LOGIN')
+            commit('SET_USER')
 
         },
         logOut({ commit }) {
@@ -147,7 +148,6 @@ export default new Vuex.Store({
             )
                 .then(function (response) {
                     if (response.data != null) {
-                        console.log(response.data);
                         context.commit('SET_PURPOSE', response.data);
                     }
                 })
@@ -160,9 +160,10 @@ export default new Vuex.Store({
 
                 });
         },
-        loadTodoList(context) {
+        loadUserPassList(context) {
+            var user = JSON.parse(localStorage.getItem("user"))
             axios
-                .get("/api/pass/",
+                .get("/api/pass/" + user.userid,
                     {
                         headers: {
                             Authorization: 'Bearer ' + localStorage.getItem("access_token") //the token is a variable which holds the token
@@ -171,7 +172,7 @@ export default new Vuex.Store({
                 )
                 .then(function (response) {
                     if (response.data != null) {
-                        context.commit('SET_TODOLIST', response.data);
+                        context.commit('SET_PASSLIST', response.data);
                     }
                 })
                 .catch(function (error) {

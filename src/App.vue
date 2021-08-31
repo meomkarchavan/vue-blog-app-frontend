@@ -18,24 +18,27 @@
           <li class="nav-item active">
             <router-link to="/" class="nav-link active">Home</router-link>
           </li>
-          <li class="nav-item">
-            <router-link :to="{ name: 'Todo' }" class="nav-link">
+          <li class="nav-item" v-if="!isAdmin">
+            <router-link :to="{ name: 'Pass' }" class="nav-link">
               Your Passes
             </router-link>
           </li>
           <li class="nav-item">
             <router-link :to="{ name: 'ApplyPass' }" class="nav-link">
-              Apply for Pass
+              <span v-if="isAdmin"> Add Pass </span>
+              <span v-else> Apply for Pass </span>
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/crud-todo" class="nav-link"> Curd </router-link>
+            <router-link to="/crud-todo" class="nav-link" v-if="isAdmin">
+              Curd
+            </router-link>
           </li>
           <li class="nav-item" v-if="!isSignedIn">
             <router-link to="/login" class="nav-link"> Login </router-link>
           </li>
           <li class="nav-item" v-else>
-            <a  class="nav-link" @click="logOut()"> LogOut </a>
+            <a class="nav-link" @click="logOut()"> LogOut </a>
           </li>
         </ul>
       </div>
@@ -50,12 +53,13 @@ import { mapState, mapActions } from "vuex";
 export default {
   name: "App",
   components: {},
-  computed: mapState(["isSignedIn",]),
+  computed: mapState(["isSignedIn", "isAdmin"]),
   created() {
     this.checkToken();
+    this.loadPurposeList();
   },
   methods: {
-    ...mapActions(["checkToken","logOut"]),
+    ...mapActions(["checkToken", "logOut", "loadPurposeList"]),
   },
 };
 </script>

@@ -1,11 +1,20 @@
 <template>
   <div class="container-fluid mt-2 col-md-12">
-    <form >
-      <label for="exampleFormControlSelect1">Select Purpose of Visit</label>
+    <form>
+      <div v-if="isAdmin">
+        <label for="userId">User Id</label>
+        <input type="text" class="form-control" v-model="passInfo.userid" />
+      
+      <input class=" mt-2" type="checkbox" v-model="passInfo.approved" />
+      <label class="form-check-label  mt-2">  Approve </label>
+      
+      </div>
+      
+      <label for="controlSelect">Select Purpose of Visit</label>
       <select
         v-model="passInfo.purposeid"
         class="form-control"
-        id="exampleFormControlSelect1"
+        id="controlSelect"
       >
         <option selected>Select</option>
 
@@ -13,16 +22,13 @@
           v-for="purpose in purposeList"
           :key="purpose.purposeid"
           :value="purpose.purposeid"
-         
         >
           {{ purpose.title }}
         </option>
       </select>
       <input type="date" class="form-control" v-bind="passInfo.date" />
     </form>
-    <button class="btn btn-primary mt-2" @click.prevent="printDate">
-      Apply
-    </button>
+    <button class="btn btn-primary mt-2" @click.prevent="Apply">Apply</button>
   </div>
 </template>
 
@@ -30,7 +36,7 @@
 import { mapActions, mapState } from "vuex";
 export default {
   name: "ApplyPass",
-  computed: mapState(["purposeList"]),
+  computed: mapState(["purposeList", "user", "isAdmin"]),
   data() {
     return {
       passInfo: {
@@ -38,13 +44,12 @@ export default {
       },
     };
   },
-  created() {
-    this.loadPurposeList();
-  },
   methods: {
-    ...mapActions(["loadPurposeList"]),
-    printDate() {
-      console.log(this.passInfo);
+    ...mapActions(["applyPass"]),
+    Apply() {
+      this.passInfo.userid = this.user.userid;
+      this.passInfo.userfullname = this.user.firstName + this.user.lastName;
+      this.applyPass(this.passInfo);
     },
   },
 };
