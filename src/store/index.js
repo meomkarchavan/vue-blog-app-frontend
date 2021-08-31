@@ -70,8 +70,17 @@ export default new Vuex.Store({
         },
         DELETE_PASS(state, pass) {
             state.passList = state.passList.filter((item) => item.passid !== pass.passid)
+        },
+        APPROVE(state, pass) {
+            state.passList.find(item => item.passid == pass.passid).approved = true
+            
+            state.passList.find(item => item.passid == pass.passid).rejected = false
+        },
+        REJECT(state, pass) {
+            state.passList.find(item => item.passid == pass.passid).approved = false
+ 
+            state.passList.find(item => item.passid == pass.passid).rejected = true
         }
-
 
 
     }, actions: {
@@ -127,6 +136,49 @@ export default new Vuex.Store({
                     console.log(error);
                 });
         },
+        rejectPass({ commit }, pass) {
+            pass.rejected=true
+            pass.approved=false
+            axios
+                .post("/api/pass/update", pass,
+                    {
+                        headers: {
+                            Authorization: 'Bearer ' + localStorage.getItem("access_token") //the token is a variable which holds the token
+                        }
+                    })
+                .then(function (response) {
+                    console.log(response.data);
+                    if (response.status === 200) {
+                        commit('REJECT',pass)
+                    }
+                })
+                .catch(function (error) {
+
+                    console.log(error);
+                });
+        },
+        approvePass({ commit }, pass) {
+            
+            pass.rejected=false
+            pass.approved=true
+            axios
+                .post("/api/pass/update", pass,
+                    {
+                        headers: {
+                            Authorization: 'Bearer ' + localStorage.getItem("access_token") //the token is a variable which holds the token
+                        }
+                    })
+                .then(function (response) {
+                    console.log(response.data);
+                    if (response.status === 200) {
+                        commit('APPROVE',pass)
+                    }
+                })
+                .catch(function (error) {
+
+                    console.log(error);
+                });
+        },
         login({ commit }, user) {
             axios
                 .post("/api/login", user)
@@ -161,9 +213,15 @@ export default new Vuex.Store({
                 });
         },
         loadUserPassList(context) {
-            var user = JSON.parse(localStorage.getItem("user"))
+            var url;
+            if(context.state.isAdmin){
+                url="/api/pass/"
+            }else{
+                var user = JSON.parse(localStorage.getItem("user"))
+               url= "/api/pass/" + user.userid
+            }
             axios
-                .get("/api/pass/" + user.userid,
+                .get(url,
                     {
                         headers: {
                             Authorization: 'Bearer ' + localStorage.getItem("access_token") //the token is a variable which holds the token

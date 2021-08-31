@@ -1,6 +1,6 @@
 <template>
-  <div class="container-fluid mt-2 col-md-12">
-    <form>
+  <div class="container mt-2 col-md-12" style="width:50%">
+    <form >
       <div v-if="isAdmin">
         <label for="userId">User Id</label>
         <input type="text" class="form-control" v-model="passInfo.userid" />
@@ -26,7 +26,7 @@
           {{ purpose.title }}
         </option>
       </select>
-      <input type="date" class="form-control" v-bind="passInfo.date" />
+      <input type="date" class="form-control" v-model="date" />
     </form>
     <button class="btn btn-primary mt-2" @click.prevent="Apply">Apply</button>
   </div>
@@ -39,16 +39,17 @@ export default {
   computed: mapState(["purposeList", "user", "isAdmin"]),
   data() {
     return {
+      date:new Date(),
       passInfo: {
-        date: new Date(),
-      },
+       },
     };
   },
   methods: {
     ...mapActions(["applyPass"]),
     Apply() {
+      this.passInfo.date=new Date(this.date)
       this.passInfo.userid = this.user.userid;
-      this.passInfo.userfullname = this.user.firstName + this.user.lastName;
+      this.passInfo.userfullname = this.user.firstName + " "+ this.user.lastName;
       this.applyPass(this.passInfo);
     },
   },

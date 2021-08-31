@@ -29,6 +29,11 @@
               <span v-else> Apply for Pass </span>
             </router-link>
           </li>
+           <li class="nav-item">
+            <router-link :to="{ name: 'Approve' }" class="nav-link">
+              <span v-if="isAdmin"> Approve Pass </span>
+            </router-link>
+          </li>
           <li class="nav-item">
             <router-link to="/crud-todo" class="nav-link" v-if="isAdmin">
               Curd

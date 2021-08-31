@@ -7,9 +7,13 @@
           v-for="pass in passList"
           :key="pass.passid"
           @click="setPass(pass)"
+          :class="{
+            'list-group-item-info': pass.purposeid == 0,
+            'list-group-item-warning': pass.purposeid == 1,
+            'list-group-item-danger': pass.purposeid == 2,
+          }"
         >
           {{ pass.userfullname }}
-          {{ pass.approved }}
           {{ pass.date.split("T")[0] }}
         </li>
       </ul>
@@ -22,7 +26,7 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   name: "PassList",
-  computed: mapState(["passList"]),
+  computed: mapState(["passList", "purposeList"]),
 
   created() {
     this.loadUserPassList();

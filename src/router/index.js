@@ -10,7 +10,7 @@ import UpdateTodo from '../views/UpdateTodo.vue'
 import FindTodo from '../views/FindTodo.vue'
 import ApplyPass from '../views/ApplyPass.vue'
 import store from '../store/'
-
+import Approve from '../views/Approve.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -68,8 +68,17 @@ const routes = [
       path: 'find-todo',
       component: FindTodo
     },
+    
 
     ]
+  },
+  {
+    path: '/approve',
+    name: 'Approve',
+    component: Approve,
+    meta: {
+      requiresAuth: true
+    },
   },
 ]
 
